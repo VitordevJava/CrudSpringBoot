@@ -73,13 +73,20 @@ public class GreetingsController {
 		return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
 	}
 	
-	@PutMapping(value= "atualizar") /*Mapeia a URL*/
+	@PutMapping(value = "atualizar") /*Mapeia a URL*/
 	@ResponseBody /*Descrição da resposta*/
-	public ResponseEntity<Usuario> atualizar (@RequestBody Usuario usuario){
+	public ResponseEntity<?> atualizar(@RequestBody Usuario usuario) {
 		
-		Usuario user = usuarioRepository.saveAndFlush(usuario); /*Salva e insere no banco*/
 		
-		return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+	    /* Verifica se o ID não foi informado*/
+	    if (usuario.getId() == null) {
+	        return new ResponseEntity<String>("ID não informado", HttpStatus.OK);
+	    }
+	    
+	    // Atualiza os dados no banco
+	    Usuario user = usuarioRepository.saveAndFlush(usuario);
+	    
+	    return new ResponseEntity<Usuario>(user, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value= "delete") /*Mapeia a URL*/
@@ -101,32 +108,7 @@ public class GreetingsController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 }

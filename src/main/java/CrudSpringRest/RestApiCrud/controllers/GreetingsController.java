@@ -36,7 +36,7 @@ public class GreetingsController {
 	 * @param name the name to greet
 	 * @return greeting text
 	 */
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "/greet/{name}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public String greetingText(@PathVariable String name) {
 		return "Spring Boot Rest API CRUD " + name + "!";
